@@ -437,7 +437,7 @@ public protocol Authentication: Trackable, Loggable {
      - important: This method only works for a refresh token obtained after auth with OAuth 2.0 API Authorization.
      - returns: a request that will yield Auth0 user's credentials
      */
-    func renew(withRefreshToken refreshToken: String, scope: String?) -> Request<Credentials, AuthenticationError>
+    func renew(withRefreshToken refreshToken: String, scope: String?, params: [String: Any]?) -> Request<Credentials, AuthenticationError>
 
     /**
      Revoke a user's refresh_token with a call to `/oauth/revoke`
@@ -804,7 +804,7 @@ public extension Authentication {
      - important: This method only works for a refresh token obtained after auth with OAuth 2.0 API Authorization.
      - returns: a request that will yield Auth0 user's credentials
      */
-    func renew(withRefreshToken refreshToken: String, scope: String? = nil) -> Request<Credentials, AuthenticationError> {
-        return self.renew(withRefreshToken: refreshToken, scope: scope)
+  func renew(withRefreshToken refreshToken: String, scope: String? = nil, params: [String: Any]? = nil) -> Request<Credentials, AuthenticationError> {
+    return self.renew(withRefreshToken: refreshToken, scope: scope, params: params)
     }
 }

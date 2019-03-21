@@ -117,7 +117,7 @@ public struct CredentialsManager {
     /// - Important: This method only works for a refresh token obtained after auth with OAuth 2.0 API Authorization.
     /// - Note: [Auth0 Refresh Tokens Docs](https://auth0.com/docs/tokens/refresh-token)
     #if os(iOS)
-    public func credentials(withScope scope: String? = nil, callback: @escaping (CredentialsManagerError?, Credentials?) -> Void) {
+    public func credentials(withScope scope: String? = nil, params: [String: Any]? = nil, callback: @escaping (CredentialsManagerError?, Credentials?) -> Void) {
         guard self.hasValid() else { return callback(.noCredentials, nil) }
         if let bioAuth = self.bioAuth {
             guard bioAuth.available else { return callback(.touchFailed(LAError(LAError.touchIDNotAvailable)), nil) }
@@ -125,20 +125,20 @@ public struct CredentialsManager {
                 guard $0 == nil else {
                     return callback(.touchFailed($0!), nil)
                 }
-                self.retrieveCredentials(withScope: scope, callback: callback)
+              self.retrieveCredentials(withScope: scope, params: params, callback: callback)
             }
         } else {
-            self.retrieveCredentials(withScope: scope, callback: callback)
+            self.retrieveCredentials(withScope: scope, params: params, callback: callback)
         }
     }
     #else
-    public func credentials(withScope scope: String? = nil, callback: @escaping (CredentialsManagerError?, Credentials?) -> Void) {
+    public func credentials(withScope scope: String? = nil, params: [String: Any]? = nil, callback: @escaping (CredentialsManagerError?, Credentials?) -> Void) {
         guard self.hasValid() else { return callback(.noCredentials, nil) }
-        self.retrieveCredentials(withScope: scope, callback: callback)
+        self.retrieveCredentials(withScope: scope, params: params, callback: callback)
     }
     #endif
 
-    private func retrieveCredentials(withScope scope: String? = nil, callback: @escaping (CredentialsManagerError?, Credentials?) -> Void) {
+  private func retrieveCredentials(withScope scope: String? = nil, params: [String: Any]? = nil, callback: @escaping (CredentialsManagerError?, Credentials?) -> Void) {
         guard
             let data = self.storage.data(forKey: self.storeKey),
             let credentials = NSKeyedUnarchiver.unarchiveObject(with: data) as? Credentials
@@ -147,7 +147,7 @@ public struct CredentialsManager {
         guard expiresIn < Date() else { return callback(nil, credentials) }
         guard let refreshToken = credentials.refreshToken else { return callback(.noRefreshToken, nil) }
 
-        self.authentication.renew(withRefreshToken: refreshToken, scope: scope).start {
+      self.authentication.renew(withRefreshToken: refreshToken, scope: scope, params: params).start {
             switch $0 {
             case .success(let credentials):
                 let newCredentials = Credentials(accessToken: credentials.accessToken,
