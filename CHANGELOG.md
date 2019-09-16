@@ -1,5 +1,44 @@
 # Change Log
 
+## [1.17.1](https://github.com/auth0/Auth0.swift/tree/1.17.1) (2019-09-04)
+[Full Changelog](https://github.com/auth0/Auth0.swift/compare/1.17.0...1.17.1)
+
+**Fixed**
+- Fixed ability to clear WebAuth session in iOS 13 [\#301](https://github.com/auth0/Auth0.swift/pull/301) ([matt](https://github.com/matt))
+
+## [1.17.0](https://github.com/auth0/Auth0.swift/tree/1.17.0) (2019-08-27)
+[Full Changelog](https://github.com/auth0/Auth0.swift/compare/1.16.1...1.17.0)
+
+**Added**
+- Added support for iOS13 changes in ASWebAuthenticationSession [\#297](https://github.com/auth0/Auth0.swift/pull/297) ([cocojoe](https://github.com/cocojoe))
+- Added authentication method for default directory login [\#296](https://github.com/auth0/Auth0.swift/pull/296) ([cocojoe](https://github.com/cocojoe))
+
+**Notes**
+Behaviour changes in iOS 13 relating to Web Authentication require that in Xcode 11 this library **must** be compiled using Swift 5.x. This should be the default setting unless it has been manually changed.
+
+## [1.16.1](https://github.com/auth0/Auth0.swift/tree/1.16.1) (2019-07-29)
+[Full Changelog](https://github.com/auth0/Auth0.swift/compare/1.16.0...1.16.1)
+
+**Fixed**
+- Fixed ObjMembers attribute added for ObjC access [\#289](https://github.com/auth0/Auth0.swift/pull/289) ([cocojoe](https://github.com/cocojoe))
+
+## [1.16.0](https://github.com/auth0/Auth0.swift/tree/1.16.0) (2019-07-17)
+[Full Changelog](https://github.com/auth0/Auth0.swift/compare/1.15.0...1.16.0)
+
+**Added**
+- Added support for root attributes when creating a new user [\#287](https://github.com/auth0/Auth0.swift/pull/287) ([cocojoe](https://github.com/cocojoe))
+
+**Fixed**
+- Fix: Remove force unwrap in AuthSession handler [\#286](https://github.com/auth0/Auth0.swift/pull/286) ([cocojoe](https://github.com/cocojoe))
+- Fix Dismiss AS/SF authentication sessions upon deep-link callback [\#281](https://github.com/auth0/Auth0.swift/pull/281) ([cysp](https://github.com/cysp))
+- Update app configuration error message for PKCE [\#280](https://github.com/auth0/Auth0.swift/pull/280) ([lbalmaceda](https://github.com/lbalmaceda))
+
+## [1.15.0](https://github.com/auth0/Auth0.swift/tree/1.15.0) (2019-04-24)
+[Full Changelog](https://github.com/auth0/Auth0.swift/compare/1.14.2...1.15.0)
+
+**Added**
+- Added Swift 5 / Xcode 10.2 Support [\#272](https://github.com/auth0/Auth0.swift/pull/272) ([cocojoe](https://github.com/cocojoe))
+
 ## [1.14.2](https://github.com/auth0/Auth0.swift/tree/1.14.2) (2019-03-18)
 [Full Changelog](https://github.com/auth0/Auth0.swift/compare/1.14.1...1.14.2)
 
