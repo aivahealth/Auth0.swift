@@ -236,7 +236,7 @@ final class Auth0WebAuth: WebAuth {
             return callback(.failure(WebAuthError(code: .noBundleIdentifier)))
         }
 
-        let provider = self.provider ?? WebAuthentication.asProvider(redirectURL: redirectURL)
+        let provider = self.provider ?? WebAuthentication.asProvider(redirectURL: redirectURL, ephemeralSession: self.ephemeralSession)
         let userAgent = provider(logoutURL) { [storage] result in
             storage.clear()
             callback(result)
